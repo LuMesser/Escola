@@ -15,12 +15,14 @@ import modelo.Escola;
  */
 public class DaoEscola {
     public static boolean inserir(Escola objeto) {
-        String sql = "INSERT INTO escola (nome, endereco, sigla) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO escola (nome, endereco, sigla, nralunos, area) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, objeto.getNome());
             ps.setString(2, objeto.getEndereco());
             ps.setString(3, objeto.getSigla());
+            ps.setInt(4, objeto.getNralunos());
+            ps.setDouble(5, objeto.getArea());
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
@@ -33,6 +35,8 @@ public class DaoEscola {
         objeto.setNome("Instituto Federal");
         objeto.setEndereco("Ibirubá");
         objeto.setSigla("IFRS");
+        objeto.setNralunos(100);
+        objeto.setArea(5.2);
         
         boolean resultado = inserir(objeto);
         if (resultado) {
@@ -42,13 +46,15 @@ public class DaoEscola {
         }
     }
     public static boolean alterar(Escola objeto) {
-        String sql = "UPDATE escola SET nome = ?, endereco = ?, sigla = ? WHERE codigo=?";
+        String sql = "UPDATE escola SET nome = ?, endereco = ?, sigla = ?, nralunos = ?, area = ? WHERE codigo=?";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, objeto.getNome()); 
             ps.setString(2, objeto.getEndereco());
             ps.setString(3, objeto.getSigla());
-            ps.setInt(4, objeto.getCodigo());
+            ps.setInt(4, objeto.getNralunos());
+            ps.setDouble(5, objeto.getArea());
+            ps.setInt(6, objeto.getCodigo());
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
