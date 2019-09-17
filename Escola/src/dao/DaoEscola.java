@@ -80,7 +80,7 @@ public class DaoEscola {
     public static List<Escola> consultar() {
         List<Escola> resultados = new ArrayList<>();
         //editar o SQL conforme a entidade
-        String sql = "SELECT codigo, nome, endereco, sigla, nralunos, area descricao FROM escola";
+        String sql = "SELECT codigo, nome, endereco, sigla, nralunos, area FROM escola";
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
